@@ -33,15 +33,49 @@ class Daily_Level(Base):
             'AnxietyLevel' : self.AnxietyLevel,
             'DepressionLevel' : self.DepressionLevel
         }
+        
+        
+class Category(Base):
+    __tablename__ = 'Category'
 
+    id = Column(Integer, primary_key=True)
+    category = Column(String(250), nullable = False)
 
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'id': self.id,
+            'category' : self.category
+        }
+
+        
+class Symptom(Base):
+    __tablename__ = 'Symptom'
+
+    id = Column(Integer, primary_key=True)
+    symptom = Column(String(250), nullable = False)
+    
+    categoryID = Column(Integer, ForeignKey('Category.id'))
+    category = relationship(Category)
+    
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'id': self.id,
+            'sympton': self.sympton,
+            'categoryID' : self.categoryID
+        }
+        
+        
 class Daily_Symptom(Base):
     __tablename__ = 'Daily_Symptom'
 
     id = Column(Integer, primary_key=True)
     
-    SymptomID = Column(Integer, ForeignKey('Symptom.id')
-    Symptom = relationship(Symptom)
+    SymptomID = Column(Integer, ForeignKey('Symptom.id'))
+    symptomRelation = relationship(Symptom)
     
     DateID = Column(Integer, ForeignKey('Daily_Level.id'))
     date = relationship(Daily_Level)
@@ -55,40 +89,6 @@ class Daily_Symptom(Base):
             'DateID' : self.DateID,           
         }
         
-        
-class Symptom(Base):
-    __tablename__ = 'Symptom'
-
-    id = Column(Integer, primary_key=True)
-    symptom = Column(String(250), nullable = false)
-    
-    categoryID = Column(Integer)
-    category = relationship(Category)
-    
-    @property
-    def serialize(self):
-        """Return object data in easily serializeable format"""
-        return {
-            'id': self.id,
-            'sympton': self.sympton,
-            'categoryID' : self.categoryID
-        }
-        
-        
-    
-class Category(Base):
-    __tablename__ = 'Category'
-
-    id = Column(Integer, primary_key=True)
-    category = Column(String(250), nullable = false)
-
-    @property
-    def serialize(self):
-        """Return object data in easily serializeable format"""
-        return {
-            'id': self.id,
-            'category' : self.category
-        }
 
         
 class User(Base):
@@ -109,6 +109,4 @@ class User(Base):
         
         
 engine = create_engine('sqlite:///mentalReport.db')
-
-
 Base.metadata.create_all(engine)

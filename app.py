@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from dataBaseSetup import Base, dailyInfo, symptons
+from dataBaseSetup import Base, Daily_Level, Daily_Symptom, Symptom, Category
 import datetime
 
 app = Flask(__name__)
@@ -15,19 +15,16 @@ session = DBSession()
 @app.route('/', methods=['GET', 'POST'])
 def rateLevels():
 	if request.method == 'POST':
-		if request.form['HighStress']:
-			newRecord = dailyInfo(Date = datetime.date.today(), StressLevel = request.form['HighStress'])
-			session.add(newRecord)
-			session.commit()
-		elif request.form['LowStress']:
-			newRecord = dailyInfo(Date = datetime.date.today(), StressLevel = request.form['LowStress'])
-			session.add(newRecord)
-			session.commit()
-		else:
-			newRecord = dailyInfo(Date = datetime.date.today(), StressLevel = request.form['MediumStress'])
-			session.add(newRecord)
-			session.commit()
+		if request.form['MediumStress']:
+			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['MediumStress'])
 			
+		if request.form['LowStress']:
+			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['LowStress'])
+			
+		if request.form['HighStress']:
+			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['HighStress'])
+		session.add(newRecord)
+		session.commit()
 		return redirect(url_for('rateLevels'))
 	else: 
 		return render_template('rateLevels.html')
