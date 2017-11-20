@@ -9,7 +9,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
   
-
+session.query(Daily_Level).delete()
 days = session.query(Daily_Level).all()
 print days
 for i in days:

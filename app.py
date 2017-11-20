@@ -12,24 +12,33 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# @app.route('/', methods=['GET', 'POST'])
+# def rateLevels():
+	# if request.method == 'POST':
+		# if request.form['MediumStress']:
+			# newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['MediumStress'])
+			
+		# if request.form['LowStress']:
+			# newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['LowStress'])
+			
+		# if request.form['HighStress']:
+			# newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['HighStress'])
+		# session.add(newRecord)
+		# session.commit()
+		# return redirect(url_for('rateLevels'))
+	# else: 
+		# return render_template('rateLevels.html', Date)
+	
 @app.route('/', methods=['GET', 'POST'])
 def rateLevels():
 	if request.method == 'POST':
-		if request.form['MediumStress']:
-			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['MediumStress'])
-			
-		if request.form['LowStress']:
-			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['LowStress'])
-			
-		if request.form['HighStress']:
-			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.form['HighStress'])
-		session.add(newRecord)
-		session.commit()
+		if request.args.get("data"):
+			newRecord = Daily_Level(Date = datetime.date.today(), StressLevel = request.args.get("data"))
+			session.add(newRecord)
+			session.commit()
 		return redirect(url_for('rateLevels'))
 	else: 
-		return render_template('rateLevels.html')
-	
-
+		return render_template('rateLevelsV2.html')
 	
 
 if __name__ == '__main__':

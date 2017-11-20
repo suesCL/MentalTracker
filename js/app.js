@@ -1,14 +1,24 @@
-var app = angular.module('rateLevels', []);
 
-//create a model of items for rating
-app.controller('itemListController', function itemListController($scope) {
-  $scope.items = [
-    {
-      name: 'Stress level',
-      level: 0
-    }, {
-      name: 'Anxiety level',
-      snippet: 0
-    }
-  ];
-});
+var ViewModel = function(){
+  var self = this;
+  self.recordLevel = ko.observable();
+	
+	//a function for extract level value and send ajax request to backend 
+	self.sendLevel = function(){
+		$.ajax({
+			type: "POST",
+			url: "localhost:8000",
+			data: self.recordLevel(),
+			success: function(response){
+				console.log(response);
+			},
+			error: function(error){
+				alert("Data cannot be posted to backend.");
+			}
+		});
+
+	};
+
+var viewModel = new ViewModel();
+
+ko.applyBindings(viewModel);
