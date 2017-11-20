@@ -1,0 +1,38 @@
+Data Modeling for mental health tracker 
+table 1:
+#general info
+
+date 
+stress level 
+anxiety level : no anxiety -- freak out completely
+depressioSymn level 
+length
+trigger: event and person 
+
+
+table 2: 
+#symptons
+phyiscal: (True false)
+racing heart
+tightness in chest
+stomachaches or headaches
+nausesa or diarrhea
+lightheadness or dizziness
+muscle tension
+
+sleep : early awakening - exces sleepiness, insomnia (integer 1,2,3)
+
+whole body: (true false)
+excessive hunger/ fatigue /loss of appetite/ restlessness  
+racing thoughts and repeating worries/
+sense something bad is happening /
+urge to avoid and get away/
+
+
+behavioral: excessive crying, irritability, social isolation
+
+cognitive :difficult concentrate, slowness in activity, thoughts of suicide
+
+weight : wegiht gain wegiht loss 
+
+ 
