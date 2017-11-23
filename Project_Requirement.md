@@ -24,3 +24,14 @@ The app is made of three pages.
 2. Display graphs showing stress level vs time, anxiety vs time and depression level vs time 
 3. Pie chart showing the percentages of the frequency of each category of symptons 
 
+# Application Organization
+Front End:
+* Framework: Knockout, AJAX, JQuery 
+
+Back End:
+* Framework: Flask 
+* File app.py contains all the backend routing and functions. 
+
+Database:
+* Sqlite connected to Flask app via sqlalchemy 
+* File dataBaseSetUp.py contains database and tables setup and schema. 
