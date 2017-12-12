@@ -3,7 +3,7 @@ Health Tracker allows user to do the following:
 
 - [ ] Display current mental status like a dashboard 
 - [ ] Display a calendar for choosing the date to record   
-- [ ] Record their daily stress level, anxiety level and depression level (mental levels) as well as the symptoms. 
+- [X] Record their daily stress level, anxiety level and depression level (mental levels) as well as the symptoms. 
 - [ ] Display analysis including mental level graph vs time, statistics of symptons and mental levels.
 
 # How to complete the project : 
